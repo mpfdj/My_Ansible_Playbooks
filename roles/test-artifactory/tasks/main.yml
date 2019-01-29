@@ -1,0 +1,7 @@
+---
+  - name: Download JRE
+    get_url:
+      url: "https://artifactory.ing.net/artifactory/releases_generic_tibco/JAVA/jre-8u141-with-JCE.tar"
+      dest: "/tmp"
+      headers: 'X-JFrog-Art-Api:AKCp5bBXeUgmqGJqJDEgHceTUZQw95orz6bx5u8jAvoWNhV43ZGQGnNtBczWqRmsoYqGKYiUV'
+      validate_certs: no

@@ -1,0 +1,12 @@
+  - name: Copy file
+    copy:
+      src: Test.jar
+      dest: /tmp/Test.jar
+
+  - name: Call jar file and get result
+    shell: java -jar /tmp/Test.jar
+    register: result
+
+  - debug:
+    msg:
+      - "result: {{ result }}"

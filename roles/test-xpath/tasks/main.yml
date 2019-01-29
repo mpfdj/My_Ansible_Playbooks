@@ -1,0 +1,60 @@
+---
+  - name: Copy xml file
+    copy:
+      src: TIBCOAdmin_5.10.0_prodInfo.xml
+      dest: "/tmp/TIBCOAdmin_5.10.0_prodInfo.xml"
+      mode: u=rwx,g=rwx,o=rwx
+
+  - name: Copy xml file
+    copy:
+      src: ems_8.4.0.000_prodInfo.xml
+      dest: "/tmp/ems_8.4.0.000_prodInfo.xml"
+      mode: u=rwx,g=rwx,o=rwx
+
+#----------------------------------------------------
+
+  - name: Get installation location using xpath
+    xml:
+      path: "/tmp/TIBCOAdmin_5.10.0_prodInfo.xml"
+      xpath: /TIBCOInstallerFeatures/installerFeature
+      content: attribute
+    register: result
+
+  - debug:
+      var: result
+      verbosity: 4
+
+  - debug:
+      msg:
+        - "Result1: {{ result.matches[0] }}"
+        - "Result2: {{ result.matches[0].installerFeature }}"
+        - "Result3: {{ result.matches[0].installerFeature.parentID }}"
+        - "Result4: {{ result.matches[0].installerFeature.installLocation }}"
+
+#----------------------------------------------------
+
+  - name: Get tpcl home directory using xpath
+    xml:
+      path: "/tmp/TIBCOAdmin_5.10.0_prodInfo.xml"
+      xpath: /TIBCOInstallerFeatures/installerFeature/postInstallAction[@target="post-install"]/postInstallActionProperty[@name="tibco.tpcl.home"]
+      content: attribute
+    register: result2
+
+  - debug:
+      msg:
+        - "Result1: {{ result2.matches[0] }}"
+        - "Result2: {{ result2.matches[0].postInstallActionProperty.value }}"
+
+#----------------------------------------------------
+
+  - name: Get EMS home directory using xpath
+    xml:
+      path: "/tmp/ems_8.4.0.000_prodInfo.xml"
+      xpath: /TIBCOInstallerFeatures/customVariables/variable[@name="ems.home"]
+      content: attribute
+    register: result3
+
+  - debug:
+      msg:
+        - "Result1: {{ result3.matches[0] }}"
+        - "Result2: {{ result3.matches[0].variable.value }}"

@@ -1,0 +1,8 @@
+# defaults file for the main reboot playbook
+check_down_retries: 720     # How many retries when waiting for system to go down (default 720*5=60m)
+check_down_delay: 3         # The delay in seconds before re-checking
+check_up_sleep: 30          # Don't start checking righy away, sleep a bit first
+check_up_timeout: 1800      # After how many seconds shall we give up when we wait for system up (default 30m)
+check_up_delay: 30          # Seconds between each check to see if the system is up again
+connect_timeout: 2          # Seconds to wait for an actual connection when host is up
+host_check_port: 22         # TCP port to check, usually you will want to test of ssh is up

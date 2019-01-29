@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TIBCOInstallerFeatures>
+    <productDef alwaysReinstall="true" buildNumber="V7.2" buildType="release" compatDisplayName="TIBCO Administrator" compatType="TIBCOAdmin" docinfoFile="" hostname="clrv0000104074.ic.ing.net" hotfixDirToBackup="" id="TIBCOAdmin" installDir="administrator/5.11" licenseFile="TIB_TIBCOAdmin_5.11.0_license.pdf" name="TIBCO Administrator 5.11.0" productMMName="" productMMVersion="" productMachineModel="false" productType="product" readmeFile="TIB_TIBCOAdmin_5.11.0_readme.txt" relnotesFile="TIB_TIBCOAdmin_5.11.0_relnotes.pdf" secondaryId="" targetPlatform="linux_x86_64" timeStamp="09-27-2018.134324" totalRequiredSizeInMB="" version="5.11.0"/>
+    <installerFeature installLocation="/opt/tibco/administrator/5.11" name="Repository" parentID="TIBCOAdmin" version="5.11.0">
+        <assemblyList>
+            <assembly displayName="TIBCO Administrator Enterprise" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_enterprise" version="5.11.0.008"/>
+            <assembly displayName="TIBCO Administrator Repository" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_repo_unix" version="5.11.0.008"/>
+            <assembly displayName="TIBCO Administrator Samples" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_samples" version="5.11.0.008"/>
+            <assembly displayName="TIBCO Administrator WebServer Configration" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_webserverconfig" version="5.11.0.008"/>
+            <assembly displayName="TIBCO Administrator Common Repository" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_repo_common" version="5.11.0.009"/>
+            <assembly displayName="TIBCO Administrator Common" installLocation="/opt/tibco/administrator/5.11" uid="product_tibco_admin_common" version="5.11.0.008"/>
+        </assemblyList>
+        <dependency description="TIBCO Rendezvous" mustBeInstalled="false" type="feature" uid="Runtime_rv" version="8.4.2.0" vpduid=""/>
+        <dependency description="TIBCO Hawk" mustBeInstalled="false" type="feature" uid="Agent_hawk" version="5.2.0.0" vpduid=""/>
+        <dependency description="TIBCO Runtime Agent" mustBeInstalled="false" type="feature" uid="Runtime_TRA" version="5.11.0.0" vpduid=""/>
+        <postInstallAction description="TIBCO Administrator Post Installation - Update *.tra files" failOnError="false" logLevel="debug" priority="9999" sequence="post-assembly-ref" target="post-install" taskFile="/opt/tibco/administrator/5.11/setup/post-install.xml">
+            <postInstallActionProperty name="tibco.tra.home.esc" value="/opt/tibco/tra/5.11"/>
+            <postInstallActionProperty name="tibco.tra.short.version" value="5.11"/>
+            <postInstallActionProperty name="tibco.tpcl.home.esc" value="/opt/tibco/tpcl/5.11"/>
+            <postInstallActionProperty name="tibco.admin.short.version" value="5.11"/>
+            <postInstallActionProperty name="tibco.rv.home" value="/opt/tibco/tibrv/8.4"/>
+            <postInstallActionProperty name="tibco.hawk.home.esc" value="/opt/tibco/hawk/5.2"/>
+            <postInstallActionProperty name="tibco.admin.home" value="/opt/tibco/administrator/5.11"/>
+            <postInstallActionProperty name="tibco.rv.home.esc" value="/opt/tibco/tibrv/8.4"/>
+            <postInstallActionProperty name="tibco.tpcl.home" value="/opt/tibco/tpcl/5.11"/>
+            <postInstallActionProperty name="tibco.hawk.home" value="/opt/tibco/hawk/5.2"/>
+            <postInstallActionProperty name="tibco.tra.home" value="/opt/tibco/tra/5.11"/>
+            <postInstallActionProperty name="tibco.installer.mode" value="silent"/>
+            <postInstallActionProperty name="tibco.admin.home.esc" value="/opt/tibco/administrator/5.11"/>
+        </postInstallAction>
+        <postInstallAction description="TIBCO Administrator Pre-Uninstallation - Delete *.tra and wrapper files" failOnError="false" logLevel="debug" priority="9999" sequence="pre-uninstall-ref" target="pre-uninstall" taskFile="/opt/tibco/administrator/5.11/setup/post-install.xml">
+            <postInstallActionProperty name="tibco.admin.home.esc" value="/opt/tibco/administrator/5.11"/>
+            <postInstallActionProperty name="tibco.admin.home" value="/opt/tibco/administrator/5.11"/>
+        </postInstallAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCOCheckForInstallLoc" sequence="post-selection">
+            <property productAcronym="RV"/>
+            <property minimumVersion="${minimum.rv.version}"/>
+            <property vpdUID="tibrv"/>
+            <property productAssemblyUID="product_tibco_rv_common"/>
+            <property productAssemblyMinVersion="${minimum.rv.version}"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCOCheckForInstallLoc" sequence="post-selection">
+            <property productAcronym="hawk"/>
+            <property minimumVersion="${minimum.hawk.version}"/>
+            <property vpdUID="hawk_agent"/>
+            <property productAssemblyUID="product_tibco_hawk_agent_common"/>
+            <property productAssemblyMinVersion="${minimum.hawk.version}"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCOCheckForInstallLoc" sequence="post-selection">
+            <property productAcronym="tpcl"/>
+            <property minimumVersion="${minimum.tpcl.version}"/>
+            <property vpdUID="tpcl"/>
+            <property productAssemblyUID="product_tibco_tpcl_common"/>
+            <property productAssemblyMinVersion="${minimum.tpcl.version}"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCOCheckForInstallLoc" sequence="post-selection">
+            <property productAcronym="TRA"/>
+            <property minimumVersion="${minimum.tra.version}"/>
+            <property vpdUID="TRA"/>
+            <property productAssemblyUID="product_tibco_tra_platform"/>
+            <property productAssemblyMinVersion="${minimum.tra.version}"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCORemoveWindowsShortcutWizardAction" sequence="post-uninstall">
+            <property shortcutFolder="TIBCO/${tibco.environment.name}/TIBCO Administrator ${admin.short.version}"/>
+            <property shortcutName="Readme"/>
+        </wizardAction>
+        <vpdentry compid="TIBCOAdmin_tibcoinventory" createuninstdir="false" dependency="" description="TIBCO Administrator" displayName="tibcoinventory" installLocation="/opt/tibco/administrator/5.11" level="2" name="tibcoinventory" parentidkey="TIBCOAdmin" version="5.11.0.1"/>
+        <vpdentry compid="TIBCOAdmin" createuninstdir="false" dependency="" description="TIBCO Administrator" displayName="TIBCOAdmin" installLocation="/opt/tibco/administrator/5.11" level="2" name="TIBCOAdmin" parentidkey="TIBCOAdmin" version="5.11.0.1"/>
+        <vpdentry compid="TIBCOAdmin_repository" createuninstdir="false" dependency="jre,1.8.0.1;TRA_runtime,5.11.0.1;hawk_agent,5.2.0.1" description="Administrator" displayName="Administrator" installLocation="/opt/tibco/administrator/5.11" level="2" name="repository" parentidkey="TIBCOAdmin" version="5.11.0.1"/>
+    </installerFeature>
+    <customSettings machineModel="false" multipleEnvironmentSupport="true"/>
+    <installationInfo mode="silent" system.java.version="1.8.0_162" uiversion="3.6.4.002"/>
+    <customVariables>
+        <variable name="admin.home" value="/opt/tibco/administrator/5.11"/>
+        <variable name="admin.home.esc" value="/opt/tibco/administrator/5.11"/>
+        <variable name="admin.short.version" value="5.11"/>
+        <variable name="minimum.rv.version" value="8.4.2"/>
+        <variable name="minimum.hawk.version" value="5.2.0"/>
+        <variable name="minimum.tpcl.version" value="5.11.0"/>
+        <variable name="minimum.tra.version" value="5.11.0"/>
+    </customVariables>
+</TIBCOInstallerFeatures>

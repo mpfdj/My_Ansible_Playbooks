@@ -1,0 +1,22 @@
+---
+  - name: Tell the system to reboot
+    shell: /bin/sleep 5 && /sbin/shutdown -r now "Ansible triggered reboot"
+    async: 1
+    poll: 0
+
+  - name: Wait for {{ ansible_hostname }} to be down
+    shell: timeout 2 bash -c "cat < /dev/null >/dev/tcp/{{ inventory_hostname }}/22" && echo Port open || echo Port closed
+    delegate_to: localhost
+    become: false
+    register: portresult
+    retries: 720
+    delay: 3
+    until: ("Port closed" in portresult.stdout_lines)
+    changed_when: ("Port closed" in portresult.stdout_lines)
+
+  - name: Wait for {{ ansible_hostname }} to be up
+    wait_for_connection:
+      sleep: 30
+      timeout: 1800
+      connect_timeout: 2
+      delay: 30

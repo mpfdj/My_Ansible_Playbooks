@@ -1,0 +1,20 @@
+---
+  - name: Copy template
+    template:
+      src: MyTemplate.txt
+      dest: "/tmp/MyTemplate.txt"
+      mode: u=rwx,g=rwx,o=rwx
+
+  - debug:
+      msg:
+        - "You can see this when result2 is True"
+    when: "(result2 == True)"
+
+  - name: "Check required variables"
+    fail: msg="Variable '{{ item }}' is not defined"
+    when: item not in vars
+    with_items: "{{ required_vars }}"
+
+  - name: "Check domain transport and storage"
+    fail: msg="When domain transport is EMS then domain storage should be DB."
+    when: "((domain_transport == 'EMS') and (domain_storage != 'DB'))"

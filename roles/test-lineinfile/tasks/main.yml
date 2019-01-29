@@ -1,0 +1,14 @@
+---
+  - name: Append comment
+    lineinfile:
+      path: /tmp/tibcoadmin_eai_domain_TO11RC.tra
+      insertbefore: '^(java.extended.properties.*)'
+      line: '# Added property CompileCommand to fix bug, for more information see: https://support.tibco.com/s/article/Tibco-KnowledgeArticle-Article-45317'
+
+  # Bug fix for more information see: https://support.tibco.com/s/article/Tibco-KnowledgeArticle-Article-45317
+  # TIBCO Administrator 5.10.0 JVM on Linux crashes when the up time is greater than 24 hours.
+  - name: Append to line
+    replace:
+      dest: /tmp/tibcoadmin_eai_domain_TO11RC.tra
+      regexp: '^(java.extended.properties.*)'
+      replace: '\1\:CompileCommand\=exclude,com/tibco/repo/RVRepoProcessBridge,handleServerHeartbeat'

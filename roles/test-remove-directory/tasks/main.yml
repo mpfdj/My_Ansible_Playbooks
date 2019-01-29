@@ -1,0 +1,15 @@
+---
+  - file:
+      path: /tmp/helloworld
+      state: directory
+      mode: u=rwx,g=rwx,o=rwx
+
+  - name: Copy file
+    copy:
+      src: helloworld.txt
+      dest: /tmp/helloworld
+
+  - name: Removing
+    file:
+      path: /tmp/helloworld
+      state: absent

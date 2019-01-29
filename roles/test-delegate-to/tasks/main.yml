@@ -1,0 +1,14 @@
+---
+  - name: Get hostname
+    shell: hostname
+    delegate_to: localhost # This way the shell command is executed on the controller host
+    become: false
+    register: result
+
+  - name: Set fact
+    set_fact:
+      hostname: "{{ result.stdout }}"
+
+  - debug:
+      msg:
+        - "hostname is: {{ hostname }}"

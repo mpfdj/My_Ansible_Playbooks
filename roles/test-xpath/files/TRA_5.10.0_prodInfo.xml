@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TIBCOInstallerFeatures>
+    <productDef alwaysReinstall="true" buildNumber="V19.2" buildType="release" compatDisplayName="TIBCO Runtime Agent"
+                compatType="TRA" docinfoFile="" hostname="lrv171jn.europe.intranet" hotfixDirToBackup="" id="TRA"
+                installDir="tra/5.10" licenseFile="TIB_TRA_5.10.0_license.pdf" name="TIBCO Runtime Agent 5.10.0"
+                productMMName="" productMMVersion="" productMachineModel="false" productType="product"
+                readmeFile="TIB_TRA_5.10.0_readme.txt" relnotesFile="TIB_TRA_5.10.0_relnotes.pdf"
+                targetPlatform="linux_x86_64" timeStamp="07-13-2018.163309" version="5.10.0"/>
+    <featureConfigInclude>
+        <include id="wrapper-linux26" version="2.4.6.001"/>
+        <include id="tibcojava64-oracle-with-sunec" version="1.8.0.051"/>
+        <include id="Designer" version="5.10.0"/>
+        <include id="tpcl" version="5.10.0"/>
+        <include id="hawk" version="5.2.0"/>
+    </featureConfigInclude>
+    <installerFeature installLocation="/opt/tibco/tra/5.10" name="Runtime" parentID="TRA" version="5.10.0">
+        <assemblyList>
+            <assembly displayName="TIBCO Runtime Agent Web Application Deployment" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_webappdeployment" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Runtime Agent Hotfix" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_hotfix" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Runtime Agent TSM" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_tsm" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Post Installation Utilities" installLocation="/opt/tibco/tools/postinstall/lib"
+                      uid="product_tibco_postinstall_utility" version="1.0.0.009"/>
+            <assembly displayName="TIBCO Runtime Agent XML SDK" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_xmlsdk" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Runtime Agent DomainUtility" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_domainutility" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Runtime Agent VPD Installer Utility" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_vpdinstallerutil" version="1.0.0.018"/>
+            <assembly displayName="TIBCO Runtime Agent XSLT Plugin" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_xsltplugin" version="5.0.5.003"/>
+            <assembly displayName="TIBCO Runtime Agent Common" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_common" version="5.10.0.014"/>
+            <assembly displayName="TIBCO Runtime Agent Platform" installLocation="/opt/tibco/tra/5.10"
+                      uid="product_tibco_tra_platform" version="5.10.0.014"/>
+        </assemblyList>
+        <dependency description="TIBCO Rendezvous" mustBeInstalled="false" type="feature" uid="Runtime_rv"
+                    version="8.4.3" vpduid=""/>
+        <dependency description="TIBCO Hawk Agent" mustBeInstalled="false" type="feature" uid="Agent_hawk"
+                    version="5.2.0" vpduid=""/>
+        <dependency description="Third Party Core Libraries" mustBeInstalled="false" type="feature" uid="Runtime_tpcl"
+                    version="5.10.0" vpduid=""/>
+        <dependency description="TIBCO Wrapper" mustBeInstalled="false" type="feature" uid="main_wrapper-linux26"
+                    version="2.4.6.0" vpduid=""/>
+        <postInstallAction description="TIBCO Runtime Agent Post Installation - Update *.tra files" failOnError="false"
+                           logLevel="debug" priority="9999" sequence="post-assembly-ref" target="post-install"
+                           taskFile="/opt/tibco/tra/5.10/setup/post-install.xml">
+            <postInstallActionProperty name="tibco.driver.type" value="${TIBCO_DRIVER_TYPE}"/>
+            <postInstallActionProperty name="tibco.ems.home" value="%TIBCO_EMS_HOME%"/>
+            <postInstallActionProperty name="tibco.ems.dir.esc" value=""/>
+            <postInstallActionProperty name="tibco.oci.path.option" value="${TIBCO_OCI_PATH_OPTION}"/>
+            <postInstallActionProperty name="tibco.tpcl.home.esc" value="${TIBCO_TPCL_HOME_ESC}"/>
+            <postInstallActionProperty name="tibco.ems.home.esc" value="%TIBCO_EMS_HOME_ESC%"/>
+            <postInstallActionProperty name="tibco.ems.dir" value=""/>
+            <postInstallActionProperty name="tibco.tra.short.version" value="5.10"/>
+            <postInstallActionProperty name="tibco.hawk.home.esc" value="${TIBCO_HAWK_HOME_ESC}"/>
+            <postInstallActionProperty name="tibco.oci.path.arg" value="${TIBCO_OCI_PATH_ARG}"/>
+            <postInstallActionProperty name="tibco.use.vendor.native.driver" value="false"/>
+            <postInstallActionProperty name="tibco.rv.home" value="${TIBCO_RV_HOME}"/>
+            <postInstallActionProperty name="tibco.driver.path" value="${TIBCO_DRIVER_PATH}"/>
+            <postInstallActionProperty name="tibco.designer.home.esc" value="${TIBCO_DESIGNER_HOME_ESC}"/>
+            <postInstallActionProperty name="tibco.oci.path" value="${TIBCO_OCI_PATH}"/>
+            <postInstallActionProperty name="tibco.tpcl.home" value="${TIBCO_TPCL_HOME}"/>
+            <postInstallActionProperty name="tibco.rv.home.esc" value="${TIBCO_RV_HOME_ESC}"/>
+            <postInstallActionProperty name="tibco.tra.home.esc" value="/opt/tibco/tra/5.10"/>
+            <postInstallActionProperty name="tibco.hawk.home" value="${TIBCO_HAWK_HOME}"/>
+            <postInstallActionProperty name="tibco.tra.home" value="/opt/tibco/tra/5.10"/>
+            <postInstallActionProperty name="tibco.designer.home" value="${TIBCO_DESIGNER_HOME}"/>
+        </postInstallAction>
+        <postInstallAction description="TIBCO Runtime Agent Pre-Uninstallation - Delete *.tra and wrapper files"
+                           failOnError="false" logLevel="debug" priority="9999" sequence="pre-uninstall-ref"
+                           target="pre-uninstall" taskFile="/opt/tibco/tra/5.10/setup/post-install.xml">
+            <postInstallActionProperty name="tibco.tra.home" value="/opt/tibco/tra/5.10"/>
+            <postInstallActionProperty name="tibco.tra.home.esc" value="/opt/tibco/tra/5.10"/>
+        </postInstallAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCOCheckForInstallLoc" sequence="post-selection">
+            <property productAcronym="ems"/>
+            <property minimumVersion="${minimum.ems.version}"/>
+            <property vpdUID="ems"/>
+            <property productAssemblyUID="product_tibco_ems_common"/>
+            <property productAssemblyMinVersion="${minimum.ems.version}"/>
+            <property showProgress="true"/>
+            <property description="Get EMS install location"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCODoStuffWithFilesWizardAction" sequence="install">
+            <property sourceFile="${tra.home.esc}/bin/domainutility.tra_template"/>
+            <property targetFile="${tra.home.esc}/bin/domainutility.tra"/>
+            <property fileAction="copy"/>
+            <property overwriteExistingFile="true"/>
+        </wizardAction>
+        <wizardAction class="com.tibco.installer.wizard.action.TIBCODoStuffWithFilesWizardAction"
+                      sequence="post-install">
+            <condition class="com.tibco.installer.wizard.condition.TIBCOFileExistsWizardCondition">
+                <property mustBeMet="true"/>
+                <property filename="${tra.home.esc}/hotfix/lib"/>
+            </condition>
+            <property sourceFile="${tra.home.esc}/hotfix/lib"/>
+            <property targetFile=""/>
+            <property fileAction="delete"/>
+            <property overwriteExistingFile="true"/>
+        </wizardAction>
+        <vpdentry compid="TRA" createuninstdir="false" dependency="" description="TIBCO Runtime Agent" displayName="TRA"
+                  installLocation="/opt/tibco/tra/5.10" level="2" name="TRA" parentidkey="TRA" version="5.10.0.1"/>
+        <vpdentry compid="TRA_tibcoinventory" createuninstdir="false" dependency="" description="/opt/tibco"
+                  displayName="tibcoinventory" installLocation="/opt/tibco/tra/5.10" level="2" name="tibcoinventory"
+                  parentidkey="TRA" version="5.10.0.1"/>
+        <vpdentry compid="tibrv_tibcoinventory" createuninstdir="false" dependency="" description="/opt/tibco"
+                  displayName="tibcoinventory" installLocation="${TIBCO_RV_HOME}" level="2" name="tibcoinventory"
+                  parentidkey="tibrv" version="${TIBCO_RV_VERSION}"/>
+        <vpdentry compid="tibrv_rendezvous" createuninstdir="false" dependency="" description="Rendezvous"
+                  displayName="rendezvous" installLocation="${TIBCO_RV_HOME}" level="2" name="rendezvous"
+                  parentidkey="tibrv" version="${TIBCO_RV_VERSION}"/>
+        <vpdentry compid="tibrv" createuninstdir="false" dependency="" description="TIBCO Rendezvous"
+                  displayName="tibrv" installLocation="${TIBCO_RV_HOME}" level="2" name="tibrv" parentidkey="tibrv"
+                  version="${TIBCO_RV_VERSION}"/>
+        <vpdentry compid="TRA_runtime" createuninstdir="false" dependency="jre,1.8.0.1;tpcl,5.10.0.1;hawk_agent,5.2.0.1"
+                  description="Runtime" displayName="runtime" installLocation="/opt/tibco/tra/5.10" level="2"
+                  name="runtime" parentidkey="TRA" version="5.10.0.1"/>
+    </installerFeature>
+    <customSettings/>
+    <documentation>
+        <readmeFile name="TIB_TRA_5.10.0_readme.txt"/>
+        <readmeFile name="TIB_hawk_5.2.0_readme.txt"/>
+        <readmeFile name="TIB_Designer_5.10.0_readme.txt"/>
+        <relnotesFile name="TIB_TRA_5.10.0_relnotes.pdf"/>
+        <relnotesFile name="TIB_hawk_5.2.0_relnotes.pdf"/>
+        <relnotesFile name="TIB_Designer_5.10.0_relnotes.pdf"/>
+        <licensePdfFile name="TIB_TRA_5.10.0_license.pdf"/>
+    </documentation>
+    <customVariables>
+        <variable name="tra.home" value="/opt/tibco/tra/5.10"/>
+        <variable name="tra.home.esc" value="/opt/tibco/tra/5.10"/>
+        <variable name="tra.short.version" value="5.10"/>
+        <variable name="tra.version" value="5.10.0"/>
+        <variable name="minimum.rv.version" value="8.4.3"/>
+        <variable name="minimum.hawk.version" value="5.2.0"/>
+        <variable name="minimum.tpcl.version" value="5.10.0"/>
+        <variable name="minimum.designer.version" value="5.10.0"/>
+        <variable name="minimum.ems.version" value="8.2.1"/>
+    </customVariables>
+</TIBCOInstallerFeatures>

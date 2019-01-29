@@ -1,0 +1,29 @@
+#
+# Copyright (c) 2008, 2012 TIBCO Software Inc.
+# All Rights Reserved.
+#
+# This software is the confidential and proprietary information of
+# TIBCO Software Inc.
+#
+#
+
+#
+# Specifies the min and max Java heap size to allocate
+java.heap.size.max=512m
+
+# Give some extra space to permgen if needed
+java.extended.properties=-XX\:MaxPermSize\=128m
+
+java.property.catalina.home=%ADMIN_HOME%/tomcat
+java.property.catalina.base=/opt/tibco/administrator/domain/eai_domain_TO11RC/tomcat
+#java.property.tibco_home /opt/tibco
+#java.property.tibco_tra_version %TRA_APPEND_VERSION%
+java.property.tibco_admin_version=5.11
+java.property.tibco_admin_appserverclassname=org.apache.catalina.startup.Bootstrap
+java.property.hawk_home=%HAWK_HOME%
+java.property.TIBCO_ADMIN_HOME=%ADMIN_HOME%
+java.property.TIBCO_TRA_HOME=%TRA_HOME%
+java.property.TIBCO_DOMAIN_NAME=eai_domain_TO11RC
+java.property.TIBCO_ADMIN_DOMAIN_HOME=/opt/tibco/administrator/domain
+java.property.TIBCO_TRA_DOMAIN_HOME=/opt/tibco/tra/domain
+java.property.TIBCO_DOMAIN_HOME=/opt/tibco/tra/domain

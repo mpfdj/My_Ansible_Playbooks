@@ -1,0 +1,8 @@
+---
+  result: True
+  result2: True
+
+  required_vars:
+    - domain_name
+    - domain_transport
+    - domain_storage

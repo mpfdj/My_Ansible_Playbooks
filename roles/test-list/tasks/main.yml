@@ -1,0 +1,21 @@
+---
+  - name: Get Administration domains
+    shell: |
+      cd /opt/tibco/tra/domain/
+      grep TIBCO_TRA_DOMAIN_HOME DomainHomes.properties | grep -o ".*\." | sed "s/\.//g" | sort
+    register: result
+
+  - name: List of Domains
+    set_fact:
+      domains: "{{ result.stdout_lines }}"
+
+  - name: List of services
+    set_fact:
+      services: "[ 'hawk-service', 'administrator-service' ]"
+
+  - debug:
+      msg:
+        - "Deleting: {{ item[0] }}-{{ item[1] }}"
+    with_nested:
+      - "{{ services }}"
+      - "{{ domains }}"

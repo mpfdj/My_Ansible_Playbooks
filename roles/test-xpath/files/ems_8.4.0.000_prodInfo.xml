@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TIBCOInstallerFeatures>
+    <productDef alwaysReinstall="true" buildNumber="V14" buildType="release" docinfoFile="TIB_ems_8.4.0_docinfo.html" hostname="clrv0000104074.ic.ing.net" hotfixDirToBackup="" id="ems" installDir="" licenseFile="TIB_ems_8.4.0_license.pdf" name="TIBCO EMS 8.4.0" productMMName="shared" productMMVersion="1.0.0" productMachineModel="true" productType="product" readmeFile="" relnotesFile="" secondaryId="" targetPlatform="linux_x86_64" timeStamp="10-05-2018.104619" totalRequiredSizeInMB="" version="8.4.0.000"/>
+    <installerFeature installLocation="/opt/tibco/ems/8.4" name="Required" parentID="ems" version="8.4.0">
+        <assemblyList>
+            <assembly displayName="TIBCO EMS Common" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_common" version="8.4.0.014"/>
+        </assemblyList>
+    </installerFeature>
+    <installerFeature installLocation="/opt/tibco/ems/8.4" name="EMS Client Baseline" parentID="ems" version="8.4.0">
+        <assemblyList>
+            <assembly displayName="assembly_tibco_com_tibco_jms_jmsclient_feature" installLocation="/opt/tibco/components/shared/1.0.0" uid="assembly_tibco_com_tibco_jms_jmsclient_feature" version="8.4.0.014"/>
+            <assembly displayName="product_tibco_ems_32bit_client_runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_32bit_client_runtime" version="8.4.0.014"/>
+            <assembly displayName="assembly_tibco_com_tibco_tpcl_javax_jms_feature" installLocation="/opt/tibco/components/shared/1.0.0" uid="assembly_tibco_com_tibco_tpcl_javax_jms_feature" version="2.0.0.002"/>
+            <assembly displayName="product_tibco_ems_64bit_client_runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_64bit_client_runtime" version="8.4.0.014"/>
+        </assemblyList>
+        <dependency description="TIBCO EMS Feature" mustBeInstalled="false" type="feature" uid="EMS Client Jars_ems" version="8.4.0.0" vpduid=""/>
+        <dependency description="TIBCO EMS Feature" mustBeInstalled="false" type="feature" uid="EMS ThirdParty_ems" version="8.4.0.0" vpduid=""/>
+    </installerFeature>
+    <installerFeature installLocation="/opt/tibco/ems/8.4" name="EMS Client Jars" parentID="ems" version="8.4.0">
+        <assemblyList>
+            <assembly displayName="TIBCO EMS Common Runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_runtime_common" version="8.4.0.014"/>
+        </assemblyList>
+    </installerFeature>
+    <installerFeature installLocation="/opt/tibco/ems/8.4" name="EMS ThirdParty" parentID="ems" version="8.4.0">
+        <assemblyList>
+            <assembly displayName="product_tibco_ems_32bit_thirdparty_runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_32bit_thirdparty_runtime" version="8.4.0.014"/>
+            <assembly displayName="product_tibco_ems_64bit_thirdparty_runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_64bit_thirdparty_runtime" version="8.4.0.014"/>
+        </assemblyList>
+        <dependency description="TIBCO EMS Feature" mustBeInstalled="false" type="feature" uid="Required_ems" version="8.4.0.0" vpduid=""/>
+        <postInstallAction description="Pre Assembly Ref Installation Steps for EMS 64bit Client Only Runtime files" failOnError="false" logLevel="info" priority="9999" sequence="pre-assembly-ref" target="pre-assembly-ref-ems_64bit_client_runtime" taskFile="/opt/tibco/ems/8.4/.uninstall/post-install.xml">
+            <postInstallActionProperty name="ems.home" value="/opt/tibco/ems/8.4"/>
+        </postInstallAction>
+        <postInstallAction description="Pre Assembly Ref Installation Steps for EMS 32bit Client Only Runtime files" failOnError="false" logLevel="info" priority="9999" sequence="pre-assembly-ref" target="pre-assembly-ref-ems_32bit_client_runtime" taskFile="/opt/tibco/ems/8.4/.uninstall/post-install.xml">
+            <postInstallActionProperty name="ems.home" value="/opt/tibco/ems/8.4"/>
+        </postInstallAction>
+        <postInstallAction description="Pre Uninstall Ref Installation Steps for EMS 64bit CLient Only Runtime files" failOnError="false" logLevel="info" priority="9999" sequence="pre-uninstall-ref" target="pre-uninstall-ref-ems_64bit_client_runtime" taskFile="/opt/tibco/ems/8.4/.uninstall/post-install.xml">
+            <postInstallActionProperty name="ems.home" value="/opt/tibco/ems/8.4"/>
+        </postInstallAction>
+        <postInstallAction description="Pre Uninstall Ref Installation Steps for EMS 32bit Client Only Runtime files" failOnError="false" logLevel="info" priority="9999" sequence="pre-uninstall-ref" target="pre-uninstall-ref-ems_32bit_client_runtime" taskFile="/opt/tibco/ems/8.4/.uninstall/post-install.xml">
+            <postInstallActionProperty name="ems.home" value="/opt/tibco/ems/8.4"/>
+        </postInstallAction>
+    </installerFeature>
+    <installerFeature installLocation="/opt/tibco/ems/8.4" name="EMS Central Administration" parentID="ems" version="8.4.0">
+        <assemblyList>
+            <assembly displayName="product_tibco_ems_ca_runtime_common" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_ca_runtime_common" version="8.4.0.014"/>
+            <assembly displayName="product_tibco_ems_ca_samples" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_ca_samples" version="8.4.0.014"/>
+            <assembly displayName="product_tibco_ems_ca_runtime" installLocation="/opt/tibco/ems/8.4" uid="product_tibco_ems_ca_runtime" version="8.4.0.014"/>
+        </assemblyList>
+    </installerFeature>
+    <customSettings enableTibcoHomeConfigDirectory="true"/>
+    <installationInfo mode="silent" system.java.version="1.7.0_131" uiversion="3.6.2.010"/>
+    <customVariables>
+        <variable name="ems.version" value="8.4.0"/>
+        <variable name="ems.shortversion" value="8.4"/>
+        <variable name="ems.home" value="/opt/tibco/ems/8.4"/>
+    </customVariables>
+</TIBCOInstallerFeatures>

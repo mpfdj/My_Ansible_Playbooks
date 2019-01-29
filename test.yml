@@ -1,0 +1,20 @@
+---
+  - name: Miels Ansible playbooks
+    hosts: all
+    become: true
+    roles:
+#      - test-artifactory
+#      - test-delegate-to
+#      - test-end-playbook
+#      - test-fqdn
+      - test-helloworld
+#      - test-if-statement-in-template
+#      - test-jar
+#      - test-lineinfile
+#      - test-list
+#      - test-pwd-vault
+#      - test-reboot-and-wait
+#      - test-remove-directory
+#      - { role: test-role, when: (args1 == 'test-role') and (args2 == True) }
+#      - test-split
+#      - test-xpath

@@ -1,0 +1,23 @@
+---
+  - include_vars: secret.yml
+    no_log: True
+
+  - name: Set facts
+    set_fact:
+      pwd1: "{{ vars[domain_name + '_admin_pwd'] }}"
+      pwd2: "{{ vars[domain_name + '_keystore_pwd'] }}"
+    no_log: True
+
+  - debug:
+      msg:
+        - "admin-pwd is: {{ pwd1 }}"
+        - "keystore-pwd is: {{ pwd2 }}"
+
+  - debug:
+      msg:
+        - "exiting password not found"
+    when: pwd1 == "" or pwd2 == ""
+
+  - debug:
+      msg:
+        - "should not display this message!"

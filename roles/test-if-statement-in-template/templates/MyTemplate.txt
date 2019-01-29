@@ -1,0 +1,9 @@
+Welcome to my template.
+
+
+{% if result == True %}
+  If you can read this the result is True. Hello {{ hello }}
+{% else %}
+  Else the result is false.
+{% endif %}
+

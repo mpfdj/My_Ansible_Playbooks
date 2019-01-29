@@ -1,0 +1,21 @@
+  - name: Get java version
+    shell: |
+      cd /opt/TIBCO/DSEngine/jre/bin
+      ./java -version 2>&1 | grep version | grep -o "[0-9].*" | sed "s/\"//g"
+    register: temp_java_version
+
+  - name: Set fact for java version
+    set_fact:
+      java_version: "{{ temp_java_version.stdout }}"
+
+  - debug:
+      msg:
+        - "Java 1.8.0_141 is already installed."
+    when: java_version == "1.8.0_141"
+
+  - meta: end_play
+    when: java_version == "1.8.0_141"
+
+  - debug:
+      msg:
+        - "This message should not be displayed!"
